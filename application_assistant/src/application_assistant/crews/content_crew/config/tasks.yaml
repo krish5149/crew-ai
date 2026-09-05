@@ -1,0 +1,76 @@
+research_jobs_task:
+  description: >
+    Search for current, entry-level {job_title} job openings that match the
+    candidate's stated location and work-mode preferences: {location}.
+    Collect for each posting: job title, company name, location, work mode
+    (remote/hybrid/onsite), key requirements, and the application link.
+    Focus on active postings only and avoid duplicates.
+  expected_output: >
+    A structured list of at least 8-10 job openings, each including title,
+    company, location, work mode, key requirements, and application link.
+  agent: job_researcher
+
+match_jobs_task:
+  description: >
+    Compare each job opening gathered by the researcher against the
+    candidate's skills, experience, and resume: {candidate_profile}.
+    Score each job from 0-100 based on skill overlap, experience fit,
+    and stated preferences. Provide a short justification for each score
+    and rank all jobs from best to worst fit.
+  expected_output: >
+    A ranked list of all evaluated jobs with match scores (0-100) and a
+    brief justification for each score, clearly identifying the top 3
+    highest-scoring opportunities.
+  agent: job_matcher
+  context:
+    - research_jobs_task
+
+customize_resumes_task:
+  description: >
+    For each of the top 3 ranked job openings, create a tailored version of
+    the candidate's resume: {candidate_resume}. Reorder and rephrase
+    experience, skills, and projects to emphasize what matters most for
+    that specific role, and incorporate relevant keywords from the job
+    description without fabricating experience. After drafting each tailored
+    resume, use the PDF Exporter Tool to save it as a PDF file named
+    "resume_<company>_<job_title>.pdf" inside the output folder.
+  expected_output: >
+    Three customized resumes (one per top job), each saved as a PDF file
+    via the PDF Exporter Tool, with the file path confirmed for each and
+    clearly labeled with the job title and company it was tailored for.
+  agent: resume_writer
+  context:
+    - match_jobs_task
+
+write_cover_letters_task:
+  description: >
+    For each of the top 3 ranked job openings, write a personalized cover
+    letter connecting the candidate's background, {candidate_profile}, to
+    the specific role and company. Reference the company/role by name,
+    highlight 2-3 relevant strengths, and keep each letter concise
+    (under 300 words).
+  expected_output: >
+    Three personalized cover letters (one per top job), each clearly
+    labeled with the job title and company, formatted in clean Markdown.
+  agent: cover_letter_writer
+  context:
+    - match_jobs_task
+
+review_applications_task:
+  description: >
+    Review all tailored resumes and cover letters produced for the top 3
+    jobs. Check for grammar and factual accuracy, ensure key terms from
+    each job description appear appropriately, verify formatting
+    consistency, and flag or fix any issues found. If corrections are made
+    to a resume, regenerate its PDF using the PDF Exporter Tool so the
+    final saved PDF reflects the reviewed, corrected version.
+  expected_output: >
+    A final, submission-ready package containing: the ranked job list with
+    match scores, links to the 3 final resume PDF files (in the output
+    folder), the 3 cover letters, and a short review summary noting any
+    corrections made or issues flagged.
+  agent: application_reviewer
+  context:
+    - match_jobs_task
+    - customize_resumes_task
+    - write_cover_letters_task

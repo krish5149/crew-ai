@@ -1,0 +1,23 @@
+[project]
+name = "application_assistant"
+version = "0.1.0"
+description = "Application_Assistant using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=1.15.17,<2.0.0"
+]
+
+[project.scripts]
+kickoff = "application_assistant.main:kickoff"
+run_crew = "application_assistant.main:kickoff"
+plot = "application_assistant.main:plot"
+run_with_trigger = "application_assistant.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "flow"
+project_id = "de9fc130-1d12-4aa4-b273-1762bd698476"
