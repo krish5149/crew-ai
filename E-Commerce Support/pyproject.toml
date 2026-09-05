@@ -1,0 +1,23 @@
+[project]
+name = "e_commerce_support"
+version = "0.1.0"
+description = "E-commerce_Support using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=1.15.17,<2.0.0"
+]
+
+[project.scripts]
+kickoff = "e_commerce_support.main:kickoff"
+run_crew = "e_commerce_support.main:kickoff"
+plot = "e_commerce_support.main:plot"
+run_with_trigger = "e_commerce_support.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "flow"
+project_id = "280db5e7-3dae-4007-960e-090b94376baf"

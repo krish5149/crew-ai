@@ -1,0 +1,20 @@
+escalation_task:
+  description: >
+    The customer said: '{query}'.
+    Step 1: Use the analyze_sentiment tool to determine the customer's sentiment
+    and urgency.
+    Step 2: Decide the escalation tier:
+      - If sentiment is "angry" OR complaint_attempts is 2 or more, this is a
+        HUMAN HANDOFF case. Do not offer any suggestion. Set priority to "Critical"
+        and human_handoff to true.
+      - Otherwise, this is a STANDARD case. Provide one short, reasonable
+        suggestion to help the customer. Set priority to "Medium" and
+        human_handoff to false.
+    Step 3: Always call the create_support_ticket tool to log the complaint,
+    regardless of tier, and include the returned ticket_id in your output.
+    Never promise refunds, discounts, or compensation yourself.
+  expected_output: >
+    A structured result with ticket_id, priority ("Low"/"Medium"/"High"/"Critical"),
+    sentiment, human_handoff (true/false), and suggestion (empty string if
+    human_handoff is true).
+  agent: escalation_agent

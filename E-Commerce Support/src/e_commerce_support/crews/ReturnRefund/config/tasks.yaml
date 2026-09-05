@@ -1,0 +1,86 @@
+parse_request_task:
+  description: >
+    Extract structured details from the customer's raw return/refund
+    request: {customer_request}. Identify the order ID, item name/SKU,
+    stated reason for return, described item condition, and note any
+    attached proof. If the order ID (or any other required field) is
+    missing or unclear, explicitly ask the user for it before finalizing
+    your output.
+  expected_output: >
+    A structured summary containing: order_id, item_name, return_reason,
+    item_condition, proof_attached, and a list of any missing fields.
+  agent: request_parser
+  human_input: true
+
+verify_order_task:
+  description: >
+    Using the parsed order_id, use the Order Lookup Tool to check the
+    order in the database and confirm it exists. Validate that the item,
+    purchase date, and amount paid match what the customer claimed.
+  expected_output: >
+    A verification report stating whether the order was found, whether
+    the claimed item/date/amount match the system records, and a clear
+    match/mismatch flag with details for each field checked.
+  agent: order_verifier
+  context:
+    - parse_request_task
+
+check_policy_task:
+  description: >
+   Using the verified order details and the stated return reason, consult
+    the return policy knowledge source to check the return window, item
+    category eligibility, and condition requirements. Cite the specific
+    policy clause for each determination.
+  expected_output: >
+    A compliance report stating pass/fail for each policy check (return
+    window, category eligibility, condition requirement), with the exact
+    policy clause cited for each, and an overall compliance verdict.
+  agent: policy_checker
+  context:
+    - verify_order_task
+
+decide_refund_task:
+  description: >
+    Review the order verification report and the policy compliance report
+    together. Make a final decision: APPROVE, DENY, or ESCALATE (for
+    ambiguous or high-value cases requiring human review). Provide clear
+    reasoning referencing both the verification and policy findings.
+  expected_output: >
+    A decision record with one of three statuses (APPROVE / DENY /
+    ESCALATE), the refund amount if approved, and a concise justification
+    referencing the specific verification and policy findings that drove
+    the decision.
+  agent: decision_maker
+  context:
+    - verify_order_task
+    - check_policy_task
+
+process_refund_task:
+  description: >
+    If the decision from the previous task is APPROVE, initiate the refund
+    transaction for the approved amount using the original payment method
+    and order reference. If the decision is DENY or ESCALATE, do not
+    process any transaction — simply confirm no action was taken and state
+    the reason (denied or pending human review).
+  expected_output: >
+    Either a transaction confirmation (transaction ID, amount, payment
+    method, status) if approved, or a clear statement that no refund was
+    processed and why, if denied or escalated.
+  agent: refund_processor
+  context:
+    - decide_refund_task
+
+notify_customer_task:
+  description: >
+    Compose a clear, empathetic message to the customer communicating the
+    final outcome of their return/refund request: the decision, the reason
+    (referencing policy where relevant), and next steps (e.g. refund
+    timeline if approved, alternative options if denied, or expected
+    timeline if escalated for human review).
+  expected_output: >
+    A customer-ready message (email format) stating the outcome, a brief
+    respectful explanation, and clear next steps or timeline.
+  agent: customer_communicator
+  context:
+    - decide_refund_task
+    - process_refund_task

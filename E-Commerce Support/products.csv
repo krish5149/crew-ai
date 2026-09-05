@@ -1,0 +1,26 @@
+product_id,product_name,category,price,description
+P001,Smartphone,Electronics,"$ 32,999.000","Feature-rich smartphone for calls, apps, photography, and everyday connectivity."
+P002,Laptop,Electronics,"$ 58,990.000","Versatile laptop designed for work, study, browsing, and entertainment."
+P003,Wireless Earbuds,Electronics,"$ 2,499.000","Compact wireless earbuds offering convenient, cable-free audio on the go."
+P004,Smartwatch,Electronics,"$ 7,499.000","Wearable smartwatch for notifications, activity tracking, and daily health insights."
+P005,Bluetooth Speaker,Electronics,"$ 3,999.000",Portable Bluetooth speaker for wireless music playback indoors or outdoors.
+P006,Power Bank,Electronics,"$ 1,299.000",Portable power bank for charging smartphones and other USB devices while travelling.
+P007,USB-C Charger,Electronics,$ 899.000,Compact USB-C charger for convenient charging of compatible electronic devices.
+P008,Mechanical Keyboard,Computer Accessories,"$ 5,499.000","Responsive mechanical keyboard suited for typing, gaming, and desktop use."
+P009,Wireless Mouse,Computer Accessories,"$ 1,799.000",Comfortable wireless mouse for smooth navigation without cable clutter.
+P010,External SSD,Computer Accessories,"$ 7,499.000",High-speed external solid-state drive for portable storage and quick file transfers.
+P011,LED Television,Home Entertainment,"$ 46,990.000","LED television for enjoying movies, shows, sports, and home entertainment."
+P012,Mixer Grinder,Home Appliances,"$ 3,499.000","Multipurpose mixer grinder for blending, grinding, and preparing everyday recipes."
+P013,Air Fryer,Home Appliances,"$ 6,999.000",Convenient air fryer for cooking crispy meals with less oil.
+P014,Vacuum Cleaner,Home Appliances,"$ 11,999.000",Practical vacuum cleaner for removing dust and debris from household surfaces.
+P015,Water Purifier,Home Appliances,"$ 15,999.000",Home water purifier designed to provide cleaner water for daily consumption.
+P016,Office Chair,Furniture,"$ 8,999.000",Supportive office chair designed for comfortable seating during work or study.
+P017,Study Table,Furniture,"$ 12,499.000","Functional study table offering a dedicated surface for reading, writing, or computer work."
+P018,Running Shoes,Fashion,"$ 2,999.000","Comfortable running shoes designed for workouts, jogging, and active everyday wear."
+P019,Backpack,Fashion,"$ 1,499.000","Versatile backpack for carrying daily essentials to work, school, or travel."
+P020,Wrist Watch,Fashion,"$ 4,999.000",Classic wrist watch for convenient timekeeping and everyday style.
+P021,Cotton Bedsheet,Home Furnishing,"$ 1,299.000",Soft cotton bedsheet designed for comfortable and breathable bedding.
+P022,Non-stick Cookware Set,Kitchen,"$ 3,999.000",Versatile non-stick cookware set for easy everyday cooking and cleaning.
+P023,Stainless Steel Bottle,Kitchen,$ 799.000,Reusable stainless steel bottle for carrying water and other beverages.
+P024,Face Wash,Beauty,$ 349.000,"Everyday facial cleanser designed to remove dirt, oil, and impurities."
+P025,Protein Powder,Health,"$ 2,199.000",Protein supplement powder for supporting daily nutrition and fitness goals.

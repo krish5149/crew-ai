@@ -1,0 +1,9 @@
+product_search_task:
+  description: >
+    The customer asked: '{Product}'.
+    Identify the product name and quantity requested (default quantity = 1 if not mentioned),
+    then use the search_product tool to find the matching product and its price.
+    Return the price as a plain number without $ symbol or commas.
+  expected_output: >
+    A structured result with product_name, quantity, and price (price as plain float, no currency symbols).
+  agent: product_search_agent

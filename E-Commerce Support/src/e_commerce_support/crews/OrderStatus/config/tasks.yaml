@@ -1,0 +1,13 @@
+order_status_task:
+  description: >
+    The customer asked: '{query}'.
+    Identify the order ID mentioned in the query. If no order ID is found,
+    clearly state that an order ID is required and do not guess one.
+    Use the get_order_status tool to fetch the order's current status,
+    shipping date, expected delivery date, and tracking number.
+    If no order is found for the given ID, clearly inform the customer.
+  expected_output: >
+    A structured result with order_id, status, order_date, shipped_date,
+    expected_delivery, and tracking_number. If the order is not found,
+    return a clear message stating so instead of guessing values.
+  agent: order_status_agent
